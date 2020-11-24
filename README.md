@@ -1,4 +1,4 @@
-![OhayoCMS](./src/public/ohayo/logo_white.png)
+![OhayoCMS](./src/public/ohayo/logo_white_git.png)
 ### OhayoCMS - система управления игровым порталом
 - [Требования](#требования)
 - [Установка](#установка)

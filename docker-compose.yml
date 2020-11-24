@@ -1,0 +1,65 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: ${DOCKER_IMAGE:-ohayocms/cms}/nginx:${DOCKER_TAG:-current}
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    environment:
+      DOMAIN: 'ohayocms.ru'
+      BACKEND_ADDRESS: 'php'
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - php
+      - mysql
+  mysql:
+    image: mysql:5.7.29
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ohayocms
+      MYSQL_USER: ohayocms
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+  php:
+    image: ${DOCKER_IMAGE:-ohayocms/cms}/php:${DOCKER_TAG:-current}-fpm
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+  composer:
+    image: composer:latest
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - php
+    entrypoint: ['composer', '--ignore-platform-reqs']
+  npm:
+    image: node:13.7
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+  artisan:
+    image: ${DOCKER_IMAGE:-ohayocms/cms}/php:${DOCKER_TAG:-current}-fpm
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - mysql
+    working_dir: /var/www/html
+    entrypoint: ['php', '/var/www/html/artisan']

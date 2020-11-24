@@ -14,7 +14,7 @@ DOCKER_USER=
 DOCKER_PASSWORD=
 
 .PHONY: all
-all: composer-install npm-install npm-run docker-up link-storage migrate
+all: composer-install npm-install npm-run docker-up link-storage migrate adminlte-install
 
 .PHONY: docker-up
 docker-up:
@@ -55,3 +55,7 @@ npm-run:
 .PHONY: npm-run-prod
 npm-run-prod:
 	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm npm run prod
+
+.PHONY: adminlte-install
+adminlte-install:
+	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm artisan adminlte:install --only=assets --only=translations

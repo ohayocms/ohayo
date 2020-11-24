@@ -14,7 +14,7 @@ DOCKER_USER=
 DOCKER_PASSWORD=
 
 .PHONY: all
-	all: composer-install npm-install npm-run docker-up storage-link migrate
+all: composer-install npm-install npm-run docker-up link-storage migrate
 
 .PHONY: docker-up
 docker-up:

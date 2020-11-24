@@ -5,6 +5,8 @@
 /src/vendor
 /src/public/css/app.css
 /src/public/js/app.js
+/src/resources/lang/vendor
+/src/public/vendor
 /src/.env
 /src/.env.backup
 /src/.phpunit.result.cache

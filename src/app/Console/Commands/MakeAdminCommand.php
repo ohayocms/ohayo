@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class MakeAdminCommand extends Command
@@ -11,14 +12,14 @@ class MakeAdminCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'make:admin {email?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Give admin rights to user by email';
 
     /**
      * Create a new command instance.
@@ -37,6 +38,17 @@ class MakeAdminCommand extends Command
      */
     public function handle()
     {
+        if(!$email = $this->argument('email')) {
+            $email = $this->ask('Enter user email');
+        }
+        $user = User::where('email', $email)->first();
+        if ($user->isAdmin()) {
+            $this->error('User is already got admin access');
+        } else {
+            $user->is_admin = 1;
+            $user->save();
+            $this->info('User '.$user->email.' got new admin access');
+        }
         return 0;
     }
 }

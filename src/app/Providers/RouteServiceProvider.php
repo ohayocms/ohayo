@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\Admin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -38,15 +39,58 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
-
             Route::middleware('web')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            $this->mapPanelRoutes();
+            $this->mapAdminRoutes();
+            if (!app()->environment('production')) {
+                $this->mapDevRoutes();
+            }
         });
+    }
+
+    /**
+     * Configure panel routes
+     *
+     * @return void
+     */
+    protected function mapPanelRoutes()
+    {
+        foreach (glob(base_path('routes/web/*.php')) as $routeFile) {
+            $routeFileName = explode('.', basename($routeFile))[0];
+            Route::middleware(['web', 'auth:sanctum', 'verified'])
+                ->prefix($routeFileName)
+                ->name($routeFileName.'.')
+                ->group($routeFile);
+        }
+    }
+
+    /**
+     * Configure admin routes
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        foreach (glob(base_path('routes/admin/*.php')) as $routeFile) {
+            $routeFileName = explode('.', basename($routeFile))[0];
+            Route::middleware(['web', 'auth:sanctum', 'verified', Admin::class])
+                ->prefix('admin/'.$routeFileName)
+                ->name('admin.'.$routeFileName.'.')
+                ->group($routeFile);
+        }
+    }
+
+    public function mapDevRoutes()
+    {
+        foreach (glob(base_path('routes/dev/*.php')) as $routeFile) {
+            $routeFileName = explode('.', basename($routeFile))[0];
+            Route::middleware(['web'])
+                ->prefix('dev/'.$routeFileName)
+                ->name('dev.'.$routeFileName.'.')
+                ->group($routeFile);
+        }
     }
 
     /**

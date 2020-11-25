@@ -21,4 +21,11 @@ class GameController extends Controller
             'games' => $this->gameService->getRepository()->getAllWithServers(),
         ]);
     }
+
+    public function details(Request $request, int $id)
+    {
+        return Inertia::render('Games/Details', [
+            'game' => $this->gameService->getRepository()->getById($id),
+        ]);
+    }
 }

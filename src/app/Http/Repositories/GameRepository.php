@@ -16,7 +16,7 @@ class GameRepository implements Interfaces\GameRepositoryInterface
 
     public function getById($id)
     {
-        return Game::findOrFail($id);
+        return Game::with('mods.servers')->where('id', $id)->first();
     }
 
     public function getAllWithServers()

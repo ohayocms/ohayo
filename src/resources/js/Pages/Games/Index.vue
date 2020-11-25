@@ -9,7 +9,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid-cols-1  mr-5" v-for="game in games">
-                    <inertia-link :href="'/game/'+game.id">
+                    <inertia-link :href="'/games/'+game.id">
                         <img :src="'/storage/'+game.image">
                         <p class="p-2"><b>{{ game.name }}</b> - {{ serversCount(game.id) }} активных серверов в
                             {{ game.mods.length }} игровых режимах.</p>

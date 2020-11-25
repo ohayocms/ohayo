@@ -17,12 +17,12 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('admin.mods.store')}}" method="POST">
+        <form action="{{route('admin.mods.update', ['id' => $mod->id])}}" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="modName">Название мода</label>
-                    <input type="text" name="name" class="form-control" id="modName" style="width: 600px;" required>
+                    <input type="text" name="name" class="form-control" value="{{$mod->name}}" id="modName" style="width: 600px;" required>
                 </div>
                 <div class="form-group" style="width: 600px;">
                     <label for="modGameSelect">Выберите игру</label>
@@ -39,7 +39,8 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Добавить новый мод</button>
+                <button type="submit" class="btn btn-success">Обновить мод</button>
+                <a href="{{route('admin.mods.delete', ['id' => $mod->id])}}" class="btn btn-danger">Удалить</a>
             </div>
         </form>
     </div>

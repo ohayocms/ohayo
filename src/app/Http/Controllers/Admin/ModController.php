@@ -45,7 +45,8 @@ class ModController extends Controller
     public function edit(Request $request, int $id)
     {
         return view('admin.mods.edit', [
-            'game' => $this->modService->getRepository()->getById($id),
+            'mod' => $this->modService->getRepository()->getById($id),
+            'games' => $this->modService->getRepository()->getAllAvailableGames(),
         ]);
     }
 

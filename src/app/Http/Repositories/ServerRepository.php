@@ -7,6 +7,7 @@ use App\Models\Mod;
 use App\Models\Server;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use xPaw\MinecraftPing;
 use xPaw\SourceQuery\SourceQuery;
 
 class ServerRepository implements Interfaces\ServerRepositoryInterface
@@ -19,7 +20,7 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
 
     public function getById(int $id)
     {
-        return Server::findOrFail($id);
+        return Server::with('mod.game')->where('id', $id)->first();
     }
 
     public function getAllAvailableMods()
@@ -59,13 +60,40 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
         }
 
         $server = $this->getById($serverId);
-        $query = new SourceQuery();
+        switch ($server->mod->game->type) {
+            case Game::TYPE_MINECRAFT:
+                $collection = $this->getMinecraftMonitoring($server);
+                break;
+            default:
+                $collection = $this->getSourceMonitoring($server);
+                break;
+        }
+        return $collection;
+    }
+
+    private function getMinecraftMonitoring(Server $server)
+    {
         try {
-            $query->Connect(explode(':', $server->address)[0], explode(':', $server->address)[1], 3, 1);
+            $query = new MinecraftPing(explode(':', $server->address)[0], explode(':', $server->address)[1]);
+        } finally {
+            $collection = new Collection([$query->Query()]);
+            if($query) {
+                $query->Close();
+            }
+            Cache::put('monitoring_cache_'.$server->id, $collection, 300);
+            return $collection;
+        }
+    }
+
+    private function getSourceMonitoring(Server $server)
+    {
+        try {
+            $query = new SourceQuery();
+            $query->Connect(explode(':', $server->address)[0], explode(':', $server->address)[1], 3, $server->type);
         } finally {
             $collection = new Collection([$query->GetInfo(), $query->GetPlayers(), $query->GetRules()]);
             $query->Disconnect();
-            Cache::put('monitoring_cache_'.$serverId, $collection, 300);
+            Cache::put('monitoring_cache_'.$server->id, $collection, 300);
             return $collection;
         }
     }

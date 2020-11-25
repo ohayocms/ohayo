@@ -19,6 +19,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "tightenco/ziggy": "^0.9.4",
+        "xpaw/php-minecraft-query": "^4.0",
         "xpaw/php-source-query-class": "^1.0"
     },
     "require-dev": {

@@ -32,4 +32,11 @@ class ServerController extends Controller
             'games' => $this->serverService->getRepository()->getAllAvailableGames(),
         ]);
     }
+
+    public function details(Request $request, int $id)
+    {
+        return Inertia::render('Servers/Details', [
+            'server' => $this->serverService->getRepository()->getById($id),
+        ]);
+    }
 }

@@ -11,4 +11,10 @@ interface ServerRepositoryInterface
 
     public function getAllAvailableMods();
 
+    public function getByGameId(int $id);
+
+    public function getAllAvailableGames();
+
+    public function getByGameIdAndModId(int $gameId, int $modId);
+
 }

@@ -7,15 +7,15 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
-                            <inertia-link :href="route('dashboard.index')">
+                            <inertia-link :href="route('index')">
                                 <jet-application-mark class="block h-9 w-auto"/>
                             </inertia-link>
                         </div>
 
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <jet-nav-link :href="route('dashboard.index')" :active="route().current('dashboard.index')">
-                                Dashboard
+                            <jet-nav-link :href="route('index')" :active="route().current('index')">
+                                Главная
                             </jet-nav-link>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="ml-3 relative">
-                            <jet-dropdown align="right" width="48">
+                            <jet-dropdown align="right" width="48" v-if="$page.user!==null">
                                 <template #trigger>
                                     <button v-if="$page.jetstream.managesProfilePhotos"
                                             class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
@@ -49,71 +49,31 @@
                                 <template #content>
                                     <!-- Account Management -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Manage Account
+                                        Аккаунт
                                     </div>
 
                                     <jet-dropdown-link :href="route('profile.show')">
-                                        Profile
+                                        Профиль
                                     </jet-dropdown-link>
-
-                                    <jet-dropdown-link :href="route('api-tokens.index')"
-                                                       v-if="$page.jetstream.hasApiFeatures">
-                                        API Tokens
-                                    </jet-dropdown-link>
-
                                     <div class="border-t border-gray-100"></div>
-
-                                    <!-- Team Management -->
-                                    <template v-if="$page.jetstream.hasTeamFeatures">
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Team
-                                        </div>
-
-                                        <!-- Team Settings -->
-                                        <jet-dropdown-link :href="route('teams.show', $page.user.current_team)">
-                                            Team Settings
-                                        </jet-dropdown-link>
-
-                                        <jet-dropdown-link :href="route('teams.create')"
-                                                           v-if="$page.jetstream.canCreateTeams">
-                                            Create New Team
-                                        </jet-dropdown-link>
-
-                                        <div class="border-t border-gray-100"></div>
-
-                                        <!-- Team Switcher -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Switch Teams
-                                        </div>
-
-                                        <template v-for="team in $page.user.all_teams">
-                                            <form @submit.prevent="switchToTeam(team)" :key="team.id">
-                                                <jet-dropdown-link as="button">
-                                                    <div class="flex items-center">
-                                                        <svg v-if="team.id == $page.user.current_team_id"
-                                                             class="mr-2 h-5 w-5 text-green-400" fill="none"
-                                                             stroke-linecap="round" stroke-linejoin="round"
-                                                             stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                        </svg>
-                                                        <div>{{ team.name }}</div>
-                                                    </div>
-                                                </jet-dropdown-link>
-                                            </form>
-                                        </template>
-
-                                        <div class="border-t border-gray-100"></div>
-                                    </template>
-
-                                    <!-- Authentication -->
-                                    <form @submit.prevent="logout">
-                                        <jet-dropdown-link as="button">
-                                            Logout
-                                        </jet-dropdown-link>
-                                    </form>
                                 </template>
+
+                                <!-- Authentication -->
+                                <form @submit.prevent="logout">
+                                    <jet-dropdown-link as="button">
+                                        Выход
+                                    </jet-dropdown-link>
+                                </form>
+
                             </jet-dropdown>
+                            <div v-else>
+                                <jet-nav-link href="/login">
+                                    Вход
+                                </jet-nav-link>
+                                <jet-nav-link href="/register">
+                                    Регистрация
+                                </jet-nav-link>
+                            </div>
                         </div>
                     </div>
 
@@ -139,9 +99,9 @@
             <!-- Responsive Navigation Menu -->
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
-                    <jet-responsive-nav-link :href="route('dashboard.index')"
-                                             :active="route().current('dashboard.index')">
-                        Dashboard
+                    <jet-responsive-nav-link :href="route('index')"
+                                             :active="route().current('index')">
+                        Главная
                     </jet-responsive-nav-link>
                 </div>
 
@@ -149,26 +109,24 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" :src="$page.user.profile_photo_url"
+                            <img class="h-10 w-10 rounded-full" v-if="$page.user!==null"
+                                 :src="$page.user.profile_photo_url"
                                  :alt="$page.user.name"/>
                         </div>
 
-                        <div class="ml-3">
+                        <div class="ml-3" v-if="$page.user!==null">
                             <div class="font-medium text-base text-gray-800">{{ $page.user.name }}</div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.user.email }}</div>
                         </div>
+                        <div class="ml-3" v-else>
+                            Вход регистрация
+                        </div>
                     </div>
 
-                    <div class="mt-3 space-y-1">
+                    <div class="mt-3 space-y-1" v-if="$page.user!==null">
                         <jet-responsive-nav-link :href="route('profile.show')"
                                                  :active="route().current('profile.show')">
                             Profile
-                        </jet-responsive-nav-link>
-
-                        <jet-responsive-nav-link :href="route('api-tokens.index')"
-                                                 :active="route().current('api-tokens.index')"
-                                                 v-if="$page.jetstream.hasApiFeatures">
-                            API Tokens
                         </jet-responsive-nav-link>
 
                         <!-- Authentication -->
@@ -177,49 +135,6 @@
                                 Logout
                             </jet-responsive-nav-link>
                         </form>
-
-                        <!-- Team Management -->
-                        <template v-if="$page.jetstream.hasTeamFeatures">
-                            <div class="border-t border-gray-200"></div>
-
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Manage Team
-                            </div>
-
-                            <!-- Team Settings -->
-                            <jet-responsive-nav-link :href="route('teams.show', $page.user.current_team)"
-                                                     :active="route().current('teams.show')">
-                                Team Settings
-                            </jet-responsive-nav-link>
-
-                            <jet-responsive-nav-link :href="route('teams.create')"
-                                                     :active="route().current('teams.create')">
-                                Create New Team
-                            </jet-responsive-nav-link>
-
-                            <div class="border-t border-gray-200"></div>
-
-                            <!-- Team Switcher -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Switch Teams
-                            </div>
-
-                            <template v-for="team in $page.user.all_teams">
-                                <form @submit.prevent="switchToTeam(team)" :key="team.id">
-                                    <jet-responsive-nav-link as="button">
-                                        <div class="flex items-center">
-                                            <svg v-if="team.id == $page.user.current_team_id"
-                                                 class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round"
-                                                 stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                 viewBox="0 0 24 24">
-                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                            <div>{{ team.name }}</div>
-                                        </div>
-                                    </jet-responsive-nav-link>
-                                </form>
-                            </template>
-                        </template>
                     </div>
                 </div>
             </div>

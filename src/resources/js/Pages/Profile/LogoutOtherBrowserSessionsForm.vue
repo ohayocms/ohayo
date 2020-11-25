@@ -1,16 +1,16 @@
 <template>
     <jet-action-section>
         <template #title>
-            Browser Sessions
+            Сеансы
         </template>
 
         <template #description>
-            Manage and logout your active sessions on other browsers and devices.
+            Управляйте активными сеансами и выходите из них в других браузерах и на других устройствах.
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.
+                При необходимости вы можете выйти из всех других сеансов браузера на всех ваших устройствах. Некоторые из ваших недавних сеансов перечислены ниже; однако этот список далеко не полный. Если вы считаете, что ваша учетная запись была взломана, вам также следует обновить свой пароль.
             </div>
 
             <!-- Other Browser Sessions -->
@@ -35,8 +35,8 @@
                             <div class="text-xs text-gray-500">
                                 {{ session.ip_address }},
 
-                                <span class="text-green-500 font-semibold" v-if="session.is_current_device">This device</span>
-                                <span v-else>Last active {{ session.last_active }}</span>
+                                <span class="text-green-500 font-semibold" v-if="session.is_current_device">Текущий сеанс</span>
+                                <span v-else>Последняя активность {{ session.last_active }}</span>
                             </div>
                         </div>
                     </div>
@@ -45,22 +45,22 @@
 
             <div class="flex items-center mt-5">
                 <jet-button @click.native="confirmLogout">
-                    Logout Other Browser Sessions
+                    Выйти со всех устройств
                 </jet-button>
 
                 <jet-action-message :on="form.recentlySuccessful" class="ml-3">
-                    Done.
+                    Готово.
                 </jet-action-message>
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
             <jet-dialog-modal :show="confirmingLogout" @close="confirmingLogout = false">
                 <template #title>
-                    Logout Other Browser Sessions
+                    Выйти с остальных устройств
                 </template>
 
                 <template #content>
-                    Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.
+                    Введите свой пароль, чтобы подтвердить, что вы хотите выйти из других сеансов на всех ваших устройствах.
 
                     <div class="mt-4">
                         <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
@@ -74,11 +74,11 @@
 
                 <template #footer>
                     <jet-secondary-button @click.native="confirmingLogout = false">
-                        Nevermind
+                        Я передумал
                     </jet-secondary-button>
 
                     <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Logout Other Browser Sessions
+                        Выход из других сеансов
                     </jet-button>
                 </template>
             </jet-dialog-modal>

@@ -56,23 +56,21 @@
                                         Профиль
                                     </jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
+                                    <form @submit.prevent="logout">
+                                        <jet-dropdown-link as="button">
+                                            Выход
+                                        </jet-dropdown-link>
+                                    </form>
                                 </template>
-
-                                <!-- Authentication -->
-                                <form @submit.prevent="logout">
-                                    <jet-dropdown-link as="button">
-                                        Выход
-                                    </jet-dropdown-link>
-                                </form>
 
                             </jet-dropdown>
                             <div v-else>
-                                <jet-nav-link href="/login">
+                                <a class="text-blue-500 background-transparent font-bold uppercase text-sm outline-none focus:outline-none mr-2" type="button" style="transition: all .15s ease" href="/login">
                                     Вход
-                                </jet-nav-link>
-                                <jet-nav-link href="/register">
+                                </a>
+                                <a href="/register" class="text-blue-500 background-transparent font-bold uppercase text-sm outline-none focus:outline-none mr-2" type="button" style="transition: all .15s ease">
                                     Регистрация
-                                </jet-nav-link>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -118,21 +116,18 @@
                             <div class="font-medium text-base text-gray-800">{{ $page.user.name }}</div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.user.email }}</div>
                         </div>
-                        <div class="ml-3" v-else>
-                            Вход регистрация
-                        </div>
                     </div>
 
                     <div class="mt-3 space-y-1" v-if="$page.user!==null">
                         <jet-responsive-nav-link :href="route('profile.show')"
                                                  :active="route().current('profile.show')">
-                            Profile
+                            Профиль
                         </jet-responsive-nav-link>
 
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
-                                Logout
+                                Выход
                             </jet-responsive-nav-link>
                         </form>
                     </div>

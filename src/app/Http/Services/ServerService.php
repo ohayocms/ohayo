@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\Repositories\Interfaces\ServerRepositoryInterface;
 use App\Http\Requests\CreateServerRequest;
 use App\Http\Requests\UpdateServerRequest;
+use App\Models\Server;
 
 class ServerService implements Interfaces\ServerServiceInterface
 {
@@ -23,16 +24,18 @@ class ServerService implements Interfaces\ServerServiceInterface
 
     public function save(CreateServerRequest $request)
     {
-        // TODO: Implement save() method.
+        Server::create($request->all());
     }
 
     public function update(UpdateServerRequest $request, int $id)
     {
-        // TODO: Implement update() method.
+        $server = $this->serverRepository->getById($id);
+        $server->update($request->all());
     }
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
+        $server = $this->serverRepository->getById($id);
+        $server->delete();
     }
 }

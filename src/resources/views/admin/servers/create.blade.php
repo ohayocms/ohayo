@@ -21,21 +21,25 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="modName">Название мода</label>
-                    <input type="text" name="name" class="form-control" id="modName" style="width: 600px;" required>
+                    <label for="serverName">Название сервера</label>
+                    <input type="text" name="name" class="form-control" id="serverName" style="width: 600px;" required>
+                </div>
+                <div class="form-group">
+                    <label for="serverAddress">IP:port сервера</label>
+                    <input type="text" name="address" class="form-control" id="serverAddress" style="width: 600px;" required>
                 </div>
                 <div class="form-group" style="width: 600px;">
-                    <label for="modGameSelect">Выберите игру</label>
-                    <select class="form-control" id="modGameSelect" name="game_id">
-                        @foreach($games as $game)
-                            <option value="{{$game->id}}">{{$game->name}}</option>
+                    <label for="serverModSelect">Выберите мод</label>
+                    <select class="form-control" id="serverModSelect" name="mod_id">
+                        @foreach($mods as $mod)
+                            <option value="{{$mod->id}}">{{$mod->name}} ({{$mod->game->name}})</option>
                         @endforeach
                     </select>
                 </div>
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Добавить новый мод</button>
+                <button type="submit" class="btn btn-success">Добавить сервер</button>
             </div>
         </form>
     </div>

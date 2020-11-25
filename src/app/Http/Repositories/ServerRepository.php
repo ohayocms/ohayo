@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 
+use App\Models\Mod;
 use App\Models\Server;
 
 class ServerRepository implements Interfaces\ServerRepositoryInterface
@@ -15,5 +16,10 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
     public function getById(int $id)
     {
         return Server::findOrFail($id);
+    }
+
+    public function getAllAvailableMods()
+    {
+        return Mod::all();
     }
 }

@@ -13,20 +13,22 @@
                 <thead>
                 <td>#</td>
                 <td>Название</td>
+                <td>IP:port</td>
                 <td>Игра</td>
-                <td>Серверов</td>
+                <td>Модификация</td>
                 <td></td>
 
                 </thead>
                 <tbody>
-                @foreach($mods as $mod)
+                @foreach($servers as $server)
                     <tr>
-                        <td>{{$mod->id}}</td>
-                        <td>{{$mod->name}}</td>
-                        <td>{{$mod->game->name}}</td>
-                        <td>{{$mod->servers->count()}}</td>
+                        <td>{{$server->id}}</td>
+                        <td>{{$server->name}}</td>
+                        <td>{{$server->address}}</td>
+                        <td>{{$server->mod->game->name}}</td>
+                        <td>{{$server->mod->name}}</td>
                         <td>
-                            <a href="{{route('admin.mods.edit', ['id' => $mod->id])}}" class="btn btn-default">Редактировать</a>
+                            <a href="{{route('admin.servers.edit', ['id' => $server->id])}}" class="btn btn-default">Редактировать</a>
                         </td>
                     </tr>
                 @endforeach
@@ -34,7 +36,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{route('admin.mods.create')}}" class="btn btn-success">Добавить новую модификацию</a>
+            <a href="{{route('admin.servers.create')}}" class="btn btn-success">Добавить сервер</a>
         </div>
     </div>
 @stop

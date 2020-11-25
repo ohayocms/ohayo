@@ -9,4 +9,6 @@ interface ServerRepositoryInterface
 
     public function getById(int $id);
 
+    public function getAllAvailableMods();
+
 }

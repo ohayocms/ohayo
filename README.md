@@ -48,7 +48,7 @@
 В OhayoCMS в качестве основной технологии использован фреймворк Laravel 8 с официальным компонентом Jetstream для личного кабинета игрока.
 [Jetstream](https://jetstream.laravel.com/1.x/introduction.html) используется в сочетании с [inertiajs](https://inertiajs.com/), которая в свою очередь позволяет писать Single Page Applications без API.
 <br>
-Мы дружим с Docker.
+Мы дружим с Docker. Используем [Debugbar](https://github.com/barryvdh/laravel-debugbar) для дебага в realtime.
 
 ## Скриншоты
 tbd...

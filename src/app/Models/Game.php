@@ -9,9 +9,14 @@ class Game extends Model
 {
     use HasFactory;
 
+    const TYPE_GOLD_SOURCE = 0;
+    const TYPE_SOURCE = 1;
+    const TYPE_MINECRAFT = 2;
+
     const ATTR_NAME = 'name';
     const ATTR_DESCRIPTION = 'description';
     const ATTR_IMAGE = 'image';
+    const ATTR_TYPE = 'type';
 
     const ATTR_CREATED_AT = 'created_at';
     const ATTR_UPDATED_AT = 'updated_at';
@@ -22,6 +27,7 @@ class Game extends Model
         self::ATTR_NAME,
         self::ATTR_DESCRIPTION,
         self::ATTR_IMAGE,
+        self::ATTR_TYPE,
     ];
 
     protected $dates = [

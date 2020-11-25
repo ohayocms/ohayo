@@ -17,6 +17,12 @@
                             <jet-nav-link :href="route('index')" :active="route().current('index')">
                                 Главная
                             </jet-nav-link>
+                            <jet-nav-link :href="route('games.index')" :active="route().current('games.*')">
+                                Игры
+                            </jet-nav-link>
+                            <jet-nav-link :href="route('servers.index')" :active="route().current('servers.*')">
+                                Сервера
+                            </jet-nav-link>
                         </div>
                     </div>
 

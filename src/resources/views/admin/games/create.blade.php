@@ -24,6 +24,14 @@
                     <label for="gameName">Название игры</label>
                     <input type="text" name="name" class="form-control" id="gameName" style="width: 600px;" required>
                 </div>
+                <div class="form-group" style="width: 600px;">
+                    <label for="gameTypeSelect">Тип игры (Для мониторинга)</label>
+                    <select class="form-control" id="gameTypeSelect" name="type">
+                        <option value="0">Gold Source Engine</option>
+                        <option value="1">Source Engine</option>
+                        <option value="2">Minecraft</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="gameDescription">Описание игры (Для страницы с игрой)</label>
                     <textarea class="form-control" id="gameDescription" rows="3" name="description" style="width: 600px;"></textarea>

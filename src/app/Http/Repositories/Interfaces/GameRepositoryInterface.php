@@ -6,5 +6,7 @@ interface GameRepositoryInterface
 {
     public function getAll();
 
+    public function getAllWithServers();
+
     public function getById($id);
 }

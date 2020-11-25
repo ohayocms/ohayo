@@ -4,8 +4,12 @@ namespace App\Providers;
 
 use App\Http\Repositories\GameRepository;
 use App\Http\Repositories\Interfaces\GameRepositoryInterface;
+use App\Http\Repositories\Interfaces\ModRepositoryInterface;
+use App\Http\Repositories\ModRepository;
 use App\Http\Services\GameService;
 use App\Http\Services\Interfaces\GameServiceInterface;
+use App\Http\Services\Interfaces\ModServiceInterface;
+use App\Http\Services\ModService;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -25,6 +29,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             GameRepositoryInterface::class,
             GameRepository::class
+        );
+
+        $this->app->bind(
+            ModServiceInterface::class,
+            ModService::class
+        );
+
+        $this->app->bind(
+            ModRepositoryInterface::class,
+            ModRepository::class
         );
     }
 

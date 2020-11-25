@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\Repositories\Interfaces\ModRepositoryInterface;
 use App\Http\Requests\CreateModRequest;
 use App\Http\Requests\UpdateModRequest;
+use App\Models\Mod;
 
 class ModService implements Interfaces\ModServiceInterface
 {
@@ -23,16 +24,18 @@ class ModService implements Interfaces\ModServiceInterface
 
     public function save(CreateModRequest $request)
     {
-        // TODO: Implement save() method.
+        Mod::create($request->all());
     }
 
     public function update(UpdateModRequest $request, int $id)
     {
-        // TODO: Implement update() method.
+        $mod = $this->getRepository()->getById($id);
+        $mod->update($request->all());
     }
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
+        $mod = $this->getRepository()->getById($id);
+        $mod->delete();
     }
 }

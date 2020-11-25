@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateGameRequest;
 use App\Http\Requests\UpdateModRequest;
 use App\Http\Services\Interfaces\GameServiceInterface;
 use App\Http\Services\Interfaces\ModServiceInterface;
+use App\Models\Mod;
 use Illuminate\Http\Request;
 
 class ModController extends Controller
@@ -24,13 +25,15 @@ class ModController extends Controller
     public function index()
     {
         return view('admin.mods.index', [
-            'mods' => $this->modService->getRepository()->getAll(),
+            'mods' => $this->modService->getRepository()->getAll()
         ]);
     }
 
     public function create()
     {
-        return view('admin.mods.create');
+        return view('admin.mods.create', [
+            'games' => $this->modService->getRepository()->getAllAvailableGames(),
+        ]);
     }
 
     public function store(CreateModRequest $request)

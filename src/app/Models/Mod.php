@@ -9,7 +9,7 @@ class Mod extends Model
 {
     use HasFactory;
 
-    const ATTR_MOD_ID = 'mod_id';
+    const ATTR_GAME_ID = 'game_id';
     const ATTR_NAME = 'name';
 
     const ATTR_CREATED_AT = 'created_at';
@@ -18,7 +18,7 @@ class Mod extends Model
     protected $table = 'mods';
 
     protected $fillable = [
-        self::ATTR_MOD_ID,
+        self::ATTR_GAME_ID,
         self::ATTR_NAME,
     ];
 

@@ -242,6 +242,22 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-wrench',
         ],
+        ['header' => 'Сервера'],
+        [
+            'text' => 'Игры',
+            'url'  => 'admin/games',
+            'icon' => 'fas fa-fw fa-gamepad',
+        ],
+        [
+            'text' => 'Модификации',
+            'url'  => 'admin/mods',
+            'icon' => 'fas fa-fw fa-american-sign-language-interpreting',
+        ],
+        [
+            'text' => 'Сервера',
+            'url'  => 'admin/servers',
+            'icon' => 'fas fa-fw fa-server',
+        ],
     ],
 
     /*

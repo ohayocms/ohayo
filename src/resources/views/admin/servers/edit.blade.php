@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Редактирование модификации')
+@section('title', 'Редактирование сервера')
 
 @section('content_header')
-    <h1>Редактирование модификации</h1>
+    <h1>Редактировать сервер</h1>
 @stop
 
 @section('content')
@@ -39,7 +39,7 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Обновить модификацию</button>
+                <button type="submit" class="btn btn-success">Обновить мод</button>
                 <a href="{{route('admin.mods.delete', ['id' => $mod->id])}}" class="btn btn-danger">Удалить</a>
             </div>
         </form>

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Редактирование модификации')
+@section('title', 'Добавить новый сервер')
 
 @section('content_header')
-    <h1>Редактирование модификации</h1>
+    <h1>Добавить сервер</h1>
 @stop
 
 @section('content')
@@ -17,30 +17,25 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('admin.mods.update', ['id' => $mod->id])}}" method="POST">
+        <form action="{{route('admin.servers.store')}}" method="POST">
             @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="modName">Название мода</label>
-                    <input type="text" name="name" class="form-control" value="{{$mod->name}}" id="modName" style="width: 600px;" required>
+                    <input type="text" name="name" class="form-control" id="modName" style="width: 600px;" required>
                 </div>
                 <div class="form-group" style="width: 600px;">
                     <label for="modGameSelect">Выберите игру</label>
                     <select class="form-control" id="modGameSelect" name="game_id">
                         @foreach($games as $game)
-                            @if($game->id === $mod->game_id)
-                                <option value="{{$game->id}}" selected>{{$game->name}}</option>
-                            @else
-                                <option value="{{$game->id}}">{{$game->name}}</option>
-                            @endif
+                            <option value="{{$game->id}}">{{$game->name}}</option>
                         @endforeach
                     </select>
                 </div>
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Обновить модификацию</button>
-                <a href="{{route('admin.mods.delete', ['id' => $mod->id])}}" class="btn btn-danger">Удалить</a>
+                <button type="submit" class="btn btn-success">Добавить новый мод</button>
             </div>
         </form>
     </div>

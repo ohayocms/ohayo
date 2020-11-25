@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Модификации')
+@section('title', 'Серверы')
 
 @section('content_header')
-    <h1>Список модификаций</h1>
+    <h1>Список серверов</h1>
 @stop
 
 @section('content')

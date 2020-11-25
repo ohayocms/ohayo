@@ -39,4 +39,9 @@ class ServerController extends Controller
             'server' => $this->serverService->getRepository()->getById($id),
         ]);
     }
+
+    public function monitoring(Request $request, int $id)
+    {
+        return $this->serverService->getRepository()->getMonitoringByServerId($id);
+    }
 }

@@ -17,4 +17,5 @@ interface ServerRepositoryInterface
 
     public function getByGameIdAndModId(int $gameId, int $modId);
 
+    public function getMonitoringByServerId(int $serverId);
 }

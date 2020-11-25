@@ -6,6 +6,8 @@ use App\Models\Game;
 use App\Models\Mod;
 use App\Models\Server;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use xPaw\SourceQuery\SourceQuery;
 
 class ServerRepository implements Interfaces\ServerRepositoryInterface
 {
@@ -48,5 +50,23 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
     public function getAllAvailableGames()
     {
         return Game::with('mods')->get();
+    }
+
+    public function getMonitoringByServerId(int $serverId)
+    {
+        if ($collection = Cache::get('monitoring_cache_'.$serverId)) {
+            return $collection;
+        }
+
+        $server = $this->getById($serverId);
+        $query = new SourceQuery();
+        try {
+            $query->Connect(explode(':', $server->address)[0], explode(':', $server->address)[1], 3, 1);
+        } finally {
+            $collection = new Collection([$query->GetInfo(), $query->GetPlayers(), $query->GetRules()]);
+            $query->Disconnect();
+            Cache::put('monitoring_cache_'.$serverId, $collection, 300);
+            return $collection;
+        }
     }
 }

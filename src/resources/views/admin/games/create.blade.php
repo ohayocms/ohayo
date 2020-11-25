@@ -27,8 +27,9 @@
                 <div class="form-group" style="width: 600px;">
                     <label for="gameTypeSelect">Тип игры (Для мониторинга)</label>
                     <select class="form-control" id="gameTypeSelect" name="type">
-                        <option value="0">Source Engine</option>
-                        <option value="1">Minecraft</option>
+                        <option value="0">Gold Source Engine</option>
+                        <option value="1">Source Engine</option>
+                        <option value="2">Minecraft</option>
                     </select>
                 </div>
                 <div class="form-group">

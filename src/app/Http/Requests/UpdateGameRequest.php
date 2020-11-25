@@ -21,7 +21,7 @@ class UpdateGameRequest extends FormRequest
             'image' => ['file', 'image',],
             'type' => [
                 'integer',
-                Rule::in([Game::TYPE_SOURCE, Game::TYPE_MINECRAFT])
+                Rule::in([Game::TYPE_GOLD_SOURCE, Game::TYPE_SOURCE, Game::TYPE_MINECRAFT])
             ],
         ];
     }

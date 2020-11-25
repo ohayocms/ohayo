@@ -27,8 +27,9 @@
                 <div class="form-group" style="width: 600px;">
                     <label for="gameTypeSelect">Тип игры (Для мониторинга)</label>
                     <select class="form-control" id="gameTypeSelect" name="type">
-                        <option value="0" @if($game->type === 0) selected @endif>Source Engine</option>
-                        <option value="1" @if($game->type === 1) selected @endif>Minecraft</option>
+                        <option value="0" @if($game->type === 0) selected @endif>Gold Source Engine</option>
+                        <option value="1" @if($game->type === 1) selected @endif>Source Engine</option>
+                        <option value="2" @if($game->type === 2) selected @endif>Minecraft</option>
                     </select>
                 </div>
                 <div class="form-group">

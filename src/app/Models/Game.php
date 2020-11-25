@@ -9,8 +9,9 @@ class Game extends Model
 {
     use HasFactory;
 
-    const TYPE_SOURCE = 0;
-    const TYPE_MINECRAFT = 1;
+    const TYPE_GOLD_SOURCE = 0;
+    const TYPE_SOURCE = 1;
+    const TYPE_MINECRAFT = 2;
 
     const ATTR_NAME = 'name';
     const ATTR_DESCRIPTION = 'description';

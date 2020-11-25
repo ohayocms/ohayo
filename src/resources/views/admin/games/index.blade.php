@@ -23,7 +23,7 @@
                 @foreach($games as $game)
                     <tr>
                         <td>{{$game->id}}</td>
-                        <td width="50px"><img src="/storage/{{$game->image}}" /></td>
+                        <td><img  width="50px" src="/storage/{{$game->image}}" /></td>
                         <td>{{$game->name}}</td>
                         <td>{{$game->description}}</td>
                         <td>{{$game->mods->count()}}</td>

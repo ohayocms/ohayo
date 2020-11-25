@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateGameRequest;
+use App\Http\Requests\UpdateGameRequest;
 use App\Http\Services\GameService;
 use App\Http\Services\Interfaces\GameServiceInterface;
 use App\Models\Game;
@@ -22,7 +23,7 @@ class GameController extends Controller
     public function index()
     {
         return view('admin.games.index', [
-            'games' => Game::all(),
+            'games' => $this->gameService->getRepository()->getAll(),
         ]);
     }
 
@@ -39,16 +40,20 @@ class GameController extends Controller
 
     public function edit(Request $request, int $id)
     {
-        return view('admin.games.edit');
+        return view('admin.games.edit', [
+            'game' => $this->gameService->getRepository()->getById($id),
+        ]);
     }
 
-    public function update()
+    public function update(UpdateGameRequest $request, int $id)
     {
-        #
+        $this->gameService->update($request, $id);
+        return redirect()->route('admin.games.index');
     }
 
-    public function delete()
+    public function delete(int $id)
     {
-        #
+        $this->gameService->delete($id);
+        return redirect()->route('admin.games.index');
     }
 }

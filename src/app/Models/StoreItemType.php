@@ -38,4 +38,9 @@ class StoreItemType extends Model
     {
         return $this->hasMany(StoreItemTypeVariable::class);
     }
+
+    public function storeItems()
+    {
+        return $this->hasMany(StoreItem::class);
+    }
 }

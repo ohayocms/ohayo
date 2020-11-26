@@ -13,7 +13,7 @@ class StoreItem extends Model
     const ATTR_NAME = 'name';
     const ATTR_DESCRIPTION = 'description';
     const ATTR_IMAGE = 'image';
-    const ATTR_TYPE = 'type';
+    const ATTR_STORE_ITEM_TYPE_ID = 'store_item_type_id';
 
     const ATTR_CREATED_AT = 'created_at';
     const ATTR_UPDATED_AT = 'updated_at';
@@ -25,7 +25,7 @@ class StoreItem extends Model
         self::ATTR_NAME,
         self::ATTR_DESCRIPTION,
         self::ATTR_IMAGE,
-        self::ATTR_TYPE,
+        self::ATTR_STORE_ITEM_TYPE_ID,
     ];
 
     protected $dates = [
@@ -41,5 +41,10 @@ class StoreItem extends Model
     public function prices()
     {
         return $this->hasMany(StoreItemPrice::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(StoreItemType::class);
     }
 }

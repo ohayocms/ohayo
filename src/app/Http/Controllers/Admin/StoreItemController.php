@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStoreItemRequest;
 use App\Http\Requests\UpdateStoreItemRequest;
 use App\Http\Services\Interfaces\StoreItemServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class StoreItemController extends Controller
 {
@@ -29,6 +30,11 @@ class StoreItemController extends Controller
         return view('admin.goods.create', [
             'servers' => $this->storeItemService->getRepository()->getAllServers(),
         ]);
+    }
+
+    public function getStoreItemTypes(int $gameId)
+    {
+        return Response::json($this->storeItemService->getRepository()->getAllStoreItemTypesByGameId($gameId));
     }
 
     public function store(CreateStoreItemRequest $request)

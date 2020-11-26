@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStoreItemRequest;
 use App\Http\Requests\UpdateStoreItemRequest;
 use App\Http\Services\Interfaces\StoreItemServiceInterface;
+use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -29,12 +30,14 @@ class StoreItemController extends Controller
     {
         return view('admin.goods.create', [
             'servers' => $this->storeItemService->getRepository()->getAllServers(),
+            'currencies' => $this->storeItemService->getRepository()->getAllCurrencies(),
         ]);
     }
 
-    public function getStoreItemTypes(int $gameId)
+    public function getStoreItemTypes(Request $request)
     {
-        return Response::json($this->storeItemService->getRepository()->getAllStoreItemTypesByGameId($gameId));
+        $server = Server::with('mod.game')->where('id', $request->get('gameId'))->first();
+        return Response::json($this->storeItemService->getRepository()->getAllStoreItemTypesByGameId($server->mod->game->id));
     }
 
     public function store(CreateStoreItemRequest $request)

@@ -11,4 +11,6 @@ interface StoreItemRepositoryInterface
     public function getAllServers();
 
     public function getAllStoreItemTypesByGameId(int $gameId);
+
+    public function getAllCurrencies();
 }

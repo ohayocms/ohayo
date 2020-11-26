@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="gameDescription">Описание игры (Для страницы с игрой)</label>
-                    <textarea class="form-control" id="gameDescription" rows="3" name="description" style="width: 600px;">{{$game->description}}</textarea>
+                    <textarea class="form-control ckeditor" id="gameDescription" rows="3" name="description" style="width: 600px;">{{$game->description}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="gameImage">Изображение игры (Для страницы с игрой)</label>
@@ -47,4 +47,13 @@
             </div>
         </form>
     </div>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 @stop
+
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
+@endsection

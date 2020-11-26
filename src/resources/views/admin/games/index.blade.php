@@ -25,7 +25,7 @@
                         <td>{{$game->id}}</td>
                         <td><img  width="50px" src="/storage/{{$game->image}}" /></td>
                         <td>{{$game->name}}</td>
-                        <td>{{$game->description}}</td>
+                        <td>{{\Illuminate\Support\Str::limit(strip_tags(html_entity_decode($game->description)), 100)}}</td>
                         <td>{{$game->mods->count()}}</td>
                         <td>
                             <a href="{{route('admin.games.edit', ['id' => $game->id])}}" class="btn btn-default">Редактировать</a>

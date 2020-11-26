@@ -11,7 +11,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid-cols-1 mr-5 row-span-full col-span-2">
                     <img :src="'/storage/'+game.image">
                     <h2 class="p-4 text-xl">{{ game.name }}</h2>
-                    <p class="p-4 pt-0"> {{ game.description }}</p>
+                    <p class="p-4 pt-0" v-html="game.description"> {{ game.description }}</p>
                 </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg grid-cols-1 mr-5 col-span-1 row-span-1">
                     <span class="p-4">

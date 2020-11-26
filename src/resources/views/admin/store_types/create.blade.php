@@ -46,6 +46,7 @@
                         Например: <br>
                         <pre>UPDATE {%table%} SET {%credits_field%}={%credits_field%}+{%value%} WHERE {%user_steam_id_field%}={%user_steam_id%}</pre> <br>
                         <p class="text-bold">Существующие переменные:</p>
+                        {%value%} - По умолчанию 1. Перезапишите эту переменную, если нужно указать другой тип/количество. <br>
                         {%user_id%} - ID пользователя на сайте <br>
                         {%user_steam_id%} и {%user_steam_id_64%} - STEAM_0.0... и 765611... ID пользователя Steam. Может отсутствовать, если он авторизовался не через Steam. В таком случае он не сможет нажать на кнопку "Купить", его попросят привязать аккаунт. <br>
                         {%user_email%} - Email пользователя на сайте <br>

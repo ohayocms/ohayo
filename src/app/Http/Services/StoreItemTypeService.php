@@ -27,7 +27,7 @@ class StoreItemTypeService implements Interfaces\StoreItemTypeServiceInterface
     {
         $storeItemType = StoreItemType::create($request->all());
 
-        if($request->get('storeItemVariablesNames')) {
+        if ($request->get('storeItemVariablesNames')) {
             foreach ($request->get('storeItemVariablesNames') as $key => $storeItemVariableName) {
                 StoreItemTypeVariable::create([
                     'store_item_type_id' => $storeItemType->id,
@@ -40,7 +40,22 @@ class StoreItemTypeService implements Interfaces\StoreItemTypeServiceInterface
 
     public function update(UpdateStoreItemTypeRequest $request, int $id)
     {
-        // TODO: Implement update() method.
+        $storeItemType = $this->getRepository()->getById($id);
+        $storeItemType->update($request->all());
+
+        foreach ($storeItemType->storeItemTypeVariables as $variable) {
+            $variable->delete();
+        }
+
+        if ($request->get('storeItemVariablesNames')) {
+            foreach ($request->get('storeItemVariablesNames') as $key => $storeItemVariableName) {
+                StoreItemTypeVariable::create([
+                    'store_item_type_id' => $storeItemType->id,
+                    'name' => $storeItemVariableName,
+                    'value' => $request->get('storeItemVariablesValues')[$key],
+                ]);
+            }
+        }
     }
 
     public function delete(int $id)

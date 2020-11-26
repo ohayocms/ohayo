@@ -44,7 +44,8 @@ class StoreItemTypeController extends Controller
     public function edit(Request $request, int $id)
     {
         return view('admin.store_types.edit', [
-            'storeItemTypes' => $this->storeItemTypeService->getRepository()->getById($id),
+            'games' => $this->storeItemTypeService->getRepository()->getAllGames(),
+            'storeItemType' => $this->storeItemTypeService->getRepository()->getById($id),
         ]);
     }
 

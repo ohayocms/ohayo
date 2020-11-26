@@ -265,6 +265,11 @@ return [
             'icon' => 'fas fa-fw fa-coins',
         ],
         [
+            'text' => 'Типы товаров',
+            'url'  => 'admin/store_types',
+            'icon' => 'fas fa-fw fa-anchor',
+        ],
+        [
             'text' => 'Товары',
             'url'  => 'admin/goods',
             'icon' => 'fas fa-fw fa-shopping-cart',

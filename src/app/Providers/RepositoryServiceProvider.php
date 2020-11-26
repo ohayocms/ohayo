@@ -8,16 +8,20 @@ use App\Http\Repositories\Interfaces\CurrencyRepositoryInterface;
 use App\Http\Repositories\Interfaces\GameRepositoryInterface;
 use App\Http\Repositories\Interfaces\ModRepositoryInterface;
 use App\Http\Repositories\Interfaces\ServerRepositoryInterface;
+use App\Http\Repositories\Interfaces\StoreItemRepositoryInterface;
 use App\Http\Repositories\ModRepository;
 use App\Http\Repositories\ServerRepository;
+use App\Http\Repositories\StoreItemRepository;
 use App\Http\Services\CurrencyService;
 use App\Http\Services\GameService;
 use App\Http\Services\Interfaces\CurrencyServiceInterface;
 use App\Http\Services\Interfaces\GameServiceInterface;
 use App\Http\Services\Interfaces\ModServiceInterface;
 use App\Http\Services\Interfaces\ServerServiceInterface;
+use App\Http\Services\Interfaces\StoreItemServiceInterface;
 use App\Http\Services\ModService;
 use App\Http\Services\ServerService;
+use App\Http\Services\StoreItemService;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -67,6 +71,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CurrencyRepositoryInterface::class,
             CurrencyRepository::class
+        );
+
+        $this->app->bind(
+            StoreItemServiceInterface::class,
+            StoreItemService::class
+        );
+
+        $this->app->bind(
+            StoreItemRepositoryInterface::class,
+            StoreItemRepository::class
         );
     }
 

@@ -17,13 +17,17 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('admin.goods.store')}}" method="POST">
+        <form action="{{route('admin.goods.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="storeItemName">Название товара</label>
                     <input type="text" name="name" class="form-control" id="storeItemName" style="width: 600px;"
                            required>
+                </div>
+                <div class="form-group" style="margin-left:25px;">
+                    <input type="checkbox" name="is_countable" class="form-check-input" id="storeItemIsCountable">
+                    <label class="form-check-label" for="storeItemIsCountable">Предмет продается с выбором количества</label>
                 </div>
                 <div class="form-group" style="width: 600px;">
                     <label for="storeItemGameSelect">Выберите сервер</label>
@@ -34,9 +38,14 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group" style="width: 600px;">
+                    <label for="storeItemType">Выберите тип товара</label>
+                    <select class="form-control" id="storeItemType" name="store_item_type_id">
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="storeItemDescription">Описание товара (Для страницы с товаром)</label>
-                    <textarea class="form-control ckeditor" id="gameDescription" rows="3" name="storeItemDescription"
+                    <textarea class="form-control ckeditor" id="storeItemDescription" rows="3" name="description"
                               style="width: 600px;"></textarea>
                 </div>
                 <div class="form-group">
@@ -45,15 +54,10 @@
                            accept="image/*">
                 </div>
                 <div class="form-group" style="width: 600px;">
-                    <label for="storeItemType">Выберите тип товара</label>
-                    <select class="form-control" id="storeItemType" name="type">
-                    </select>
-                </div>
-                <div class="form-group" style="width: 600px;">
                     <h4>Ценники</h4>
                     <div class="alert alert-info">
                         <p class="text-bold">Примите во внимание.</p>
-                        Оставьте цену пустой, если не хотите продавать товар за выбранную валюту
+                        Оставьте цену -1, если не хотите продавать товар за выбранную валюту
                     </div>
                     <table class="table">
                         <thead>
@@ -64,7 +68,7 @@
                         @foreach($currencies as $currency)
                             <tr>
                                 <td>{{$currency->name}}</td>
-                                <td class="input-group mb-3"><input name="priceCurrency[{{$currency->id}}]" aria-describedby="basic-addon2" value="0" class="form-control">
+                                <td class="input-group mb-3"><input name="priceCurrency[{{$currency->id}}]" aria-describedby="basic-addon2" value="-1" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">{{$currency->sign}}</span>
                                     </div>

@@ -14,6 +14,7 @@ class StoreItem extends Model
     const ATTR_DESCRIPTION = 'description';
     const ATTR_IMAGE = 'image';
     const ATTR_STORE_ITEM_TYPE_ID = 'store_item_type_id';
+    const ATTR_IS_COUNTABLE = 'is_countable';
 
     const ATTR_CREATED_AT = 'created_at';
     const ATTR_UPDATED_AT = 'updated_at';
@@ -26,6 +27,7 @@ class StoreItem extends Model
         self::ATTR_DESCRIPTION,
         self::ATTR_IMAGE,
         self::ATTR_STORE_ITEM_TYPE_ID,
+        self::ATTR_IS_COUNTABLE,
     ];
 
     protected $dates = [
@@ -38,13 +40,13 @@ class StoreItem extends Model
         return $this->belongsTo(Server::class);
     }
 
-    public function prices()
-    {
-        return $this->hasMany(StoreItemPrice::class);
-    }
-
-    public function type()
+    public function storeItemType()
     {
         return $this->belongsTo(StoreItemType::class);
+    }
+
+    public function storeItemPrices()
+    {
+        return $this->hasMany(StoreItemPrice::class);
     }
 }

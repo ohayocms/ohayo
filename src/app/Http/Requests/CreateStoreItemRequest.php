@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class CreateStoreItemRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,7 +14,12 @@ class CreateStoreItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'server_id' => ['required', 'exists:App\Models\Server,id',],
+            'store_item_type_id' => ['required', 'exists:App\Models\StoreItemType,id',],
+            'name' => ['required', 'max:255',],
+            'description' => ['required',],
+            'image' => ['file', 'image',],
+            'priceCurrency' => ['array']
         ];
     }
 }

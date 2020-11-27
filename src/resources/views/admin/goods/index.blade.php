@@ -26,7 +26,7 @@
                         <td>{{$storeItem->name}}</td>
                         <td>{{$storeItem->server->mod->game->name}}</td>
                         <td>{{$storeItem->server->name}}</td>
-                        <td></td>
+                        <td>{{$storeItem->storeItemType->name}}</td>
                         <td>
                             <a href="{{route('admin.goods.edit', ['id' => $storeItem->id])}}" class="btn btn-default">Редактировать</a>
                         </td>

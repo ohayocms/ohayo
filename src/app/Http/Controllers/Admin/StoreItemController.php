@@ -50,6 +50,8 @@ class StoreItemController extends Controller
     {
         return view('admin.goods.edit', [
             'storeItem' => $this->storeItemService->getRepository()->getById($id),
+            'servers' => $this->storeItemService->getRepository()->getAllServers(),
+            'currencies' => $this->storeItemService->getRepository()->getAllCurrencies(),
         ]);
     }
 

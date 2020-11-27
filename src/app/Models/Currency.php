@@ -26,4 +26,14 @@ class Currency extends Model
         self::ATTR_CREATED_AT,
         self::ATTR_UPDATED_AT,
     ];
+
+    public function prices()
+    {
+        return $this->hasMany(StoreItemPrice::class);
+    }
+
+    public function scopeItemId($query, int $itemId, int $currencyId)
+    {
+        return $query->where('store_item_id', '=', $itemId)->where('currency_id', '=', $currencyId)->first();
+    }
 }

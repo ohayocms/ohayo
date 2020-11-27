@@ -94,6 +94,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Обновить тип товара</button>
+                <a href="{{route('admin.store_types.delete', ['id' => $storeItemType->id])}}" class="btn btn-danger">Удалить</a>
             </div>
         </form>
     </div>

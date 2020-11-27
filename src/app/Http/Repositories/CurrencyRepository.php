@@ -14,7 +14,7 @@ class CurrencyRepository implements Interfaces\CurrencyRepositoryInterface
 
     public function getById(int $id)
     {
-        return Currency::findOrFail($id);
+        return Currency::with('prices')->where('id', '=', $id)->first();
     }
 
     public function getAllConnectionsWithTables()

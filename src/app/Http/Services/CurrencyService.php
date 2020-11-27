@@ -36,6 +36,9 @@ class CurrencyService implements Interfaces\CurrencyServiceInterface
     public function delete(int $id)
     {
         $currency = $this->currencyRepository->getById($id);
+        foreach ($currency->prices as $price) {
+            $price->delete();
+        }
         $currency->delete();
     }
 }

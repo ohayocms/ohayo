@@ -17,7 +17,7 @@ class StoreItemTypeRepository implements Interfaces\StoreItemTypeRepositoryInter
 
     public function getById(int $id)
     {
-        return StoreItemType::with('storeItemTypeVariables')->where('id', $id)->first();
+        return StoreItemType::with('storeItemTypeVariables')->with('storeItems.storeItemPrices')->where('id', $id)->first();
     }
 
     public function getAllGames()

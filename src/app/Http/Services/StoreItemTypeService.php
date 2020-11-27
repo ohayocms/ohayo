@@ -60,6 +60,19 @@ class StoreItemTypeService implements Interfaces\StoreItemTypeServiceInterface
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
+        $storeItemType = $this->storeItemTypeRepository->getById($id);
+
+        foreach ($storeItemType->storeItems as $storeItem) {
+            foreach ($storeItem->storeItemPrices as $price) {
+                $price->delete();
+            }
+            $storeItem->delete();
+        }
+
+        foreach ($storeItemType->storeItemTypeVariables as $variable) {
+            $variable->delete();
+        }
+
+        $storeItemType->delete();
     }
 }

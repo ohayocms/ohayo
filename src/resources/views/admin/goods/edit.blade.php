@@ -77,7 +77,7 @@
                             <tr>
                                 <td>{{$currency->name}}</td>
                                 <td class="input-group mb-3">
-                                    <input name="priceCurrency[{{$currency->id}}]" aria-describedby="basic-addon2" value="{{$storeItem->storeItemPrices->filter(function ($price) use ($storeItem, $currency) {if($currency->id === $price->currency_id && $storeItem->id === $price->store_item_id) return $price;})->first()->value}}" class="form-control">
+                                    <input name="priceCurrency[{{$currency->id}}]" aria-describedby="basic-addon2" value="{{$storeItem->storeItemPrices->filter(function ($price) use ($storeItem, $currency) {if($currency->id === $price->currency_id && $storeItem->id === $price->store_item_id) return $price;})->first() ? $storeItem->storeItemPrices->filter(function ($price) use ($storeItem, $currency) {if($currency->id === $price->currency_id && $storeItem->id === $price->store_item_id) return $price;})->first()->value : -1}}" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="basic-addon2">{{$currency->sign}}</span>
                                     </div>

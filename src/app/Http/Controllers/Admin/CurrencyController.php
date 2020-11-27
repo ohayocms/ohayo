@@ -26,7 +26,9 @@ class CurrencyController extends Controller
 
     public function create()
     {
-        return view('admin.currencies.create');
+        return view('admin.currencies.create', [
+            'connections' => $this->currencyService->getRepository()->getAllConnectionsWithTables(),
+        ]);
     }
 
     public function store(CreateCurrencyRequest $request)
@@ -39,6 +41,7 @@ class CurrencyController extends Controller
     {
         return view('admin.currencies.edit', [
             'currency' => $this->currencyService->getRepository()->getById($id),
+            'connections' => $this->currencyService->getRepository()->getAllConnectionsWithTables(),
         ]);
     }
 

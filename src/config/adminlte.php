@@ -258,6 +258,27 @@ return [
             'url'  => 'admin/servers',
             'icon' => 'fas fa-fw fa-server',
         ],
+        ['header' => 'Магазин'],
+        [
+            'text' => 'Валюты',
+            'url'  => 'admin/currencies',
+            'icon' => 'fas fa-fw fa-coins',
+        ],
+        [
+            'text' => 'Типы товаров',
+            'url'  => 'admin/store_types',
+            'icon' => 'fas fa-fw fa-anchor',
+        ],
+        [
+            'text' => 'Товары',
+            'url'  => 'admin/goods',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+        ],
+        [
+            'text' => 'Покупки',
+            'url'  => 'admin/orders',
+            'icon' => 'fas fa-fw fa-money-bill-wave-alt',
+        ],
     ],
 
     /*

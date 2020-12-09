@@ -17,7 +17,7 @@ class StoreItemRepository implements Interfaces\StoreItemRepositoryInterface
 
     public function getById(int $id)
     {
-        return StoreItem::with('storeItemPrices')->where('id', $id)->first();
+        return StoreItem::with('storeItemPrices.currency')->where('id', $id)->first();
     }
 
     public function getAllServers()
@@ -33,5 +33,10 @@ class StoreItemRepository implements Interfaces\StoreItemRepositoryInterface
     public function getAllCurrencies()
     {
         return Currency::all();
+    }
+
+    public function getAllWithServer()
+    {
+        return StoreItem::with('storeItemPrices')->with('server')->get();
     }
 }

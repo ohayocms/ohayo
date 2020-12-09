@@ -6,6 +6,8 @@ interface StoreItemRepositoryInterface
 {
     public function getAll();
 
+    public function getAllWithServer();
+
     public function getById(int $id);
 
     public function getAllServers();

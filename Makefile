@@ -56,6 +56,10 @@ npm-run:
 npm-run-prod:
 	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm npm run prod
 
+.PHONY: seed-settings
+seed-settings:
+	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm artisan db:seed --class=SettingsSeeder
+
 .PHONY: adminlte-install
 adminlte-install:
 	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm artisan adminlte:install --only=assets --only=translations

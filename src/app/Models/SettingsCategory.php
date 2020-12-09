@@ -14,7 +14,7 @@ class SettingsCategory extends Model
     const ATTR_CREATED_AT = 'created_at';
     const ATTR_UPDATED_AT = 'updated_at';
 
-    protected $table = 'settings';
+    protected $table = 'settings_categories';
 
     protected $fillable = [
         self::ATTR_NAME,

@@ -33,4 +33,9 @@ class Server extends Model
     {
         return $this->belongsTo(Mod::class);
     }
+
+    public function storeItems()
+    {
+        return $this->hasMany(StoreItem::class);
+    }
 }

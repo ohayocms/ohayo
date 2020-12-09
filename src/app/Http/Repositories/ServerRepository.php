@@ -8,6 +8,7 @@ use App\Models\Server;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use xPaw\MinecraftPing;
+use xPaw\MinecraftPingException;
 use xPaw\SourceQuery\SourceQuery;
 
 class ServerRepository implements Interfaces\ServerRepositoryInterface
@@ -20,7 +21,7 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
 
     public function getById(int $id)
     {
-        return Server::with('mod.game')->where('id', $id)->first();
+        return Server::with('mod.game')->with('storeItems')->where('id', $id)->first();
     }
 
     public function getAllAvailableMods()
@@ -59,7 +60,7 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
             return $collection;
         }
 
-        $server = $this->getById($serverId);
+        $server = Server::findOrFail($serverId);
         switch ($server->mod->game->type) {
             case Game::TYPE_MINECRAFT:
                 $collection = $this->getMinecraftMonitoring($server);
@@ -75,9 +76,11 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
     {
         try {
             $query = new MinecraftPing(explode(':', $server->address)[0], explode(':', $server->address)[1]);
+        } catch (MinecraftPingException $exception) {
+            return new Collection($exception);
         } finally {
             $collection = new Collection([$query->Query()]);
-            if($query) {
+            if ($query) {
                 $query->Close();
             }
             Cache::put('monitoring_cache_'.$server->id, $collection, 300);
@@ -85,8 +88,10 @@ class ServerRepository implements Interfaces\ServerRepositoryInterface
         }
     }
 
-    private function getSourceMonitoring(Server $server)
-    {
+    private
+    function getSourceMonitoring(
+        Server $server
+    ) {
         try {
             $query = new SourceQuery();
             $query->Connect(explode(':', $server->address)[0], explode(':', $server->address)[1], 3, $server->type);

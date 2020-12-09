@@ -23,6 +23,9 @@
                             <jet-nav-link :href="route('servers.index')" :active="route().current('servers.*')">
                                 Сервера
                             </jet-nav-link>
+                            <jet-nav-link :href="route('store.index')" :active="route().current('store.*')">
+                                Магазин
+                            </jet-nav-link>
                         </div>
                     </div>
 

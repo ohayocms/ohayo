@@ -14,7 +14,7 @@ DOCKER_USER=
 DOCKER_PASSWORD=
 
 .PHONY: all
-all: composer-install npm-install npm-run docker-up link-storage migrate adminlte-install
+all: composer-install npm-install npm-run docker-up link-storage migrate adminlte-install db-seed
 
 .PHONY: docker-up
 docker-up:
@@ -55,6 +55,10 @@ npm-run:
 .PHONY: npm-run-prod
 npm-run-prod:
 	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm npm run prod
+
+.PHONY: db-seed
+db-seed:
+	DOCKER_IMAGE=${DOCKER_IMAGE} DOCKER_TAG=${DOCKER_TAG} docker-compose run --rm artisan db:seed
 
 .PHONY: seed-settings
 seed-settings:

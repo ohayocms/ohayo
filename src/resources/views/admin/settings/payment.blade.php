@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Настройки')
+@section('title', 'Настройки платежных систем')
 
 @section('content_header')
-    <h1>Настройки</h1>
+    <h1>Настройки платежных систем</h1>
 @stop
 
 @section('content')
     <div class="card">
-        <form action="{{route('admin.settings.main.save')}}" method="POST">
+        <form action="{{route('admin.settings.payment.save')}}" method="POST">
             @csrf
             <div class="card-header">
                 <a href="{{route('admin.settings.index')}}" style="margin-right:15px;">Общие настройки</a>

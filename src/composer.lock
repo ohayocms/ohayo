@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c084dcd9a13647ea273c9256e1e4d3e",
+    "content-hash": "651de948dca496590ad2a447cefe3234",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -4617,6 +4617,49 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "unitpay/php-sdk",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:unitpay/php-sdk.git",
+                "reference": "653d45efd2ad2c06d002e104acd4093e64e457fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unitpay/php-sdk/zipball/653d45efd2ad2c06d002e104acd4093e64e457fd",
+                "reference": "653d45efd2ad2c06d002e104acd4093e64e457fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./UnitPay.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "unitpay",
+                    "email": "office@unitpay.ru",
+                    "homepage": "https://unitpay.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP SDK for UnitPay",
+            "homepage": "https://github.com/unitpay/php-sdk",
+            "keywords": [
+                "pay",
+                "unitpay"
+            ],
+            "time": "2020-08-31T08:46:05+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.2.0",
             "source": {
@@ -7127,7 +7170,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.4|^8.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

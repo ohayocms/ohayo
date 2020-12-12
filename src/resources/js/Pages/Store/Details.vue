@@ -89,7 +89,7 @@ export default {
             form: this.$inertia.form({
                 '_method': 'POST',
                 currency_id: "",
-                count: 0,
+                count: 1,
             }, {
                 bag: 'processBuyForm',
                 resetOnSuccess: false,
@@ -104,7 +104,9 @@ export default {
     ],
     methods: {
         processBuyItem: function () {
-            console.log('processed');
+            this.form.put(route('store.process'), {
+                preserveScroll: true
+            })
         },
         countValidCurrencies: function () {
             let count = 0;
